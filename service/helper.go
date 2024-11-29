@@ -16,7 +16,7 @@ import (
 
 const (
 	EnvRpcUrl     = "RPC_URL"
-	DefaultRpcUrl = "https://ethereum-sepolia-rpc.publicnode.com"
+	DefaultRpcUrl = "https://ethereum-rpc.publicnode.com"
 )
 
 // Helper function to make JSON-RPC calls.
