@@ -1,0 +1,86 @@
+basePath: /
+definitions:
+  models.Transaction:
+    description: A transaction record on the blockchain
+    properties:
+      blockHash:
+        example: 0x59d7f3c1cf9ada06b52cd36efea2be5b29dd1e15649aaf92c45d305277ec6693
+        type: string
+      blockNum:
+        example: 2132563
+        type: integer
+      from:
+        example: 0x95222290dd7278aa3ddd389cc1e1d165cc4bafe5
+        type: string
+      hash:
+        example: 0x009ed951afbef35139089ce03192a5a2d3226c397407c5f39a707c7f3d596bc8
+        type: string
+      timestamp:
+        example: 2024-11-29 09:42:12 +0900 KST
+        type: string
+      to:
+        example: 0xe688b84b23f322a994a53dbf8e15fa82cdb71127
+        type: string
+      value:
+        example: "0xc047d21ca5f809"
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Ethereum Parser
+  title: Ethereum Parser
+  version: "1.0"
+paths:
+  /subscribe:
+    post:
+      description: Allows a user to subscribe to an Ethereum address to track transactions
+      parameters:
+      - description: Address to subscribe
+        in: body
+        name: address
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: 'Subscribed to address: {address}'
+          schema:
+            type: string
+        "400":
+          description: Bad Request Error Message
+          schema:
+            type: string
+        "405":
+          description: Method Not Allowed Error Message
+          schema:
+            type: string
+      tags:
+      - subscription
+  /transactions:
+    get:
+      description: Retrieves a list of transactions for an Ethereum address
+      parameters:
+      - description: Address to get transactions for
+        in: query
+        name: address
+        required: true
+        type: string
+      responses:
+        "200":
+          description: List of transactions
+          schema:
+            items:
+              $ref: '#/definitions/models.Transaction'
+            type: array
+        "400":
+          description: Bad Request Error Message
+          schema:
+            type: string
+        "405":
+          description: Method Not Allowed Error Message
+          schema:
+            type: string
+      tags:
+      - transactions
+swagger: "2.0"

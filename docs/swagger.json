@@ -1,0 +1,128 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Ethereum Parser",
+        "title": "Ethereum Parser",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/subscribe": {
+            "post": {
+                "description": "Allows a user to subscribe to an Ethereum address to track transactions",
+                "tags": [
+                    "subscription"
+                ],
+                "parameters": [
+                    {
+                        "description": "Address to subscribe",
+                        "name": "address",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Subscribed to address: {address}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request Error Message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "405": {
+                        "description": "Method Not Allowed Error Message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions": {
+            "get": {
+                "description": "Retrieves a list of transactions for an Ethereum address",
+                "tags": [
+                    "transactions"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Address to get transactions for",
+                        "name": "address",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of transactions",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Transaction"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request Error Message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "405": {
+                        "description": "Method Not Allowed Error Message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Transaction": {
+            "description": "A transaction record on the blockchain",
+            "type": "object",
+            "properties": {
+                "blockHash": {
+                    "type": "string",
+                    "example": "0x59d7f3c1cf9ada06b52cd36efea2be5b29dd1e15649aaf92c45d305277ec6693"
+                },
+                "blockNum": {
+                    "type": "integer",
+                    "example": 2132563
+                },
+                "from": {
+                    "type": "string",
+                    "example": "0x95222290dd7278aa3ddd389cc1e1d165cc4bafe5"
+                },
+                "hash": {
+                    "type": "string",
+                    "example": "0x009ed951afbef35139089ce03192a5a2d3226c397407c5f39a707c7f3d596bc8"
+                },
+                "timestamp": {
+                    "type": "string",
+                    "example": "2024-11-29 09:42:12 +0900 KST"
+                },
+                "to": {
+                    "type": "string",
+                    "example": "0xe688b84b23f322a994a53dbf8e15fa82cdb71127"
+                },
+                "value": {
+                    "type": "string",
+                    "example": "0xc047d21ca5f809"
+                }
+            }
+        }
+    }
+}
