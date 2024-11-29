@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	"runtime"
 	"syscall"
 	"time"
 
@@ -26,7 +25,6 @@ const (
 // @host		localhost:8080
 // @BasePath	/
 func main() {
-	runtime.GOMAXPROCS(runtime.NumCPU())
 	// Load configuration
 	rpcURL := os.Getenv(service.EnvRpcUrl)
 	if rpcURL == "" {
